@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  college-api:
+    container_name: advicent-college-local
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+    ports:
+      - 8080:443
+    networks:
+      - back-end
+
+
+networks:
+  back-end:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "true"
