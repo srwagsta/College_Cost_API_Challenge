@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AdvicentChallenge.Models;
 using AdvicentChallenge.Supervisor.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Serialization;
 
 namespace AdvicentChallenge.Controllers
 {
@@ -54,8 +53,8 @@ namespace AdvicentChallenge.Controllers
 
                 var collegeResponse = new CollegeViewModel
                 {
-                    Cost = request.roomAndBoard
-                        ? college.RoomAndBoard + college.InStateTuition
+                    Cost = request.roomAndBoard ?
+                        college.InStateTuition != null ? college.RoomAndBoard + college.InStateTuition : college.RoomAndBoard
                         : college.InStateTuition
                 };
                  // TODO: Implement data shaping

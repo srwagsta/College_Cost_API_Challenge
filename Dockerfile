@@ -1,9 +1,7 @@
-FROM mcr.microsoft.com/dotnet/core/runtime:2.2 AS base
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 80
  
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
-
+FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
 COPY ["AdvicentChallenge.csproj", ""]
 RUN dotnet restore "AdvicentChallenge.csproj"
@@ -17,4 +15,4 @@ RUN dotnet publish "AdvicentChallenge.csproj" -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "AdvicentChallenge.dll"]
+ENTRYPOINT ["dotnet", "/app/AdvicentChallenge.dll"]
