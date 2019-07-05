@@ -54,7 +54,7 @@ namespace AdvicentChallenge.Controllers
                 var collegeResponse = new CollegeViewModel
                 {
                     Cost = request.roomAndBoard ?
-                        college.InStateTuition != null ? college.RoomAndBoard + college.InStateTuition : college.RoomAndBoard
+                        college.RoomAndBoard + college.InStateTuition ?? college.RoomAndBoard
                         : college.InStateTuition
                 };
                  // TODO: Implement data shaping

@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "5cbe26ba-8acb-41d2-b46e-2312157b2c11",
+		"name": "Avdicent Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET all colleges",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/colleges",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"colleges"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET college cost based on name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8444eba6-8053-4f93-a824-3c10d7f556bb",
+						"exec": [
+							"pm.test(\"Excepect Brandeis University to have cost of 70182\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.cost).to.eql(70182);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"collegeName\": \"Brandeis University\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/college",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"college"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET college cost based on name with null in-state tuition",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"collegeName\": \"Brandeis University\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/college",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"college"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET college cost based on name WITH roomAndBoard set to false",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb5b111a-4f54-43df-81f7-8e7aeb7454ee",
+						"exec": [
+							"pm.test(\"Excepect Castleton State College to have cost of 12449 when roomAndBaord is false\", function () {",
+							"    pm.expect(pm.response.json().cost).to.eql(12449);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"collegeName\": \"Castleton State College\",\n    \"roomAndBoard\": \"false\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/college",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"college"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
